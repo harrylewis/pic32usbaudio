@@ -58,6 +58,8 @@ DRV_I2S_BUFFER_HANDLE bufferHandle;
 int count = 0;
 int events = -1;
 
+void func(void);
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Callback Functions
@@ -228,7 +230,7 @@ void APP_USB_AUDIO_Tasks (void) {
         
         case APP_USB_AUDIO_STATE_WAIT_FOR_I2S:
             
-            if (DRV_I2S_Status(sysObj.drvI2S1) == SYS_STATUS_READY) {
+            if (DRV_I2S_Status(sysObj.drvI2S0) == SYS_STATUS_READY) {
                 AppUsbAudioData.state = APP_USB_AUDIO_STATE_I2S_OPEN;
             }
             
@@ -236,7 +238,7 @@ void APP_USB_AUDIO_Tasks (void) {
         
         case APP_USB_AUDIO_STATE_I2S_OPEN:
             
-            AppUsbAudioData.i2sHandle = DRV_I2S_Open(DRV_I2S_INDEX_1, DRV_IO_INTENT_READ);
+            AppUsbAudioData.i2sHandle = DRV_I2S_Open(DRV_I2S_INDEX_0, DRV_IO_INTENT_READ);
             
             if (AppUsbAudioData.i2sHandle != DRV_HANDLE_INVALID) {
                 AppUsbAudioData.state = APP_USB_AUDIO_STATE_I2S_SET_BUFFER_HANDLER;
@@ -276,7 +278,7 @@ void APP_USB_AUDIO_Tasks (void) {
         case APP_USB_AUDIO_STATE_SUBMIT_INITIAL_READ_REQUEST:
             
             
-            DRV_I2S_BufferAddRead(AppUsbAudioData.i2sHandle, &AppUsbAudioData.i2sBufferHandle, rxBuffer, sizeof(rxBuffer));
+            DRV_I2S_BufferAddRead(AppUsbAudioData.i2sHandle, &AppUsbAudioData.i2sBufferHandle, &rxBuffer[0], sizeof(rxBuffer));
             //count = DRV_I2S_Read(AppUsbAudioData.i2sHandle, &buffer[0], SIZE);
             AppUsbAudioData.state = APP_USB_AUDIO_STATE_PROCESS_DATA;
             
@@ -310,18 +312,25 @@ void APP_USB_AUDIO_Tasks (void) {
 
 }
 
+void func(void) {
+    return;
+}
+
 
 void APP_USB_AUDIO_I2SBufferEventHandler(DRV_I2S_BUFFER_EVENT event, DRV_I2S_BUFFER_HANDLE bufferHandle, uintptr_t context) {
     
     switch (event) {
         
         case DRV_I2S_BUFFER_EVENT_COMPLETE:
+            AppUsbAudioData.state = APP_USB_AUDIO_STATE_INIT;
         break;
         
         case DRV_I2S_BUFFER_EVENT_ERROR:
+            AppUsbAudioData.state = APP_USB_AUDIO_STATE_INIT;
         break;
         
         case DRV_I2S_BUFFER_EVENT_ABORT:
+            AppUsbAudioData.state = APP_USB_AUDIO_STATE_INIT;
         break;
         
     }

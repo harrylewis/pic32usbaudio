@@ -94,7 +94,6 @@ typedef struct
 {
     SYS_MODULE_OBJ  sysDma;
     SYS_MODULE_OBJ  drvI2S0;
-    SYS_MODULE_OBJ  drvI2S1;
     SYS_MODULE_OBJ  drvUSBObject;
     
     SYS_MODULE_OBJ  usbDevObject0;

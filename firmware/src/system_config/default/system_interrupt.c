@@ -75,12 +75,6 @@ void __ISR(_DMA0_VECTOR, ipl2AUTO) _IntHandlerSysDmaCh0(void)
     SYS_DMA_TasksISR(sysObj.sysDma, DMA_CHANNEL_0);
 }
 
-void __ISR(_DMA2_VECTOR, ipl3AUTO) _IntHandlerSysDmaCh1(void)
-{          
-    SYS_DMA_TasksISR(sysObj.sysDma, DMA_CHANNEL_2);
-}
-
-
  
 void __ISR(_USB_1_VECTOR, ipl1AUTO) _IntHandlerUSBInstance0(void)
 {

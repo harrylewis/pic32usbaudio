@@ -122,25 +122,6 @@ const DRV_I2S_INIT drvI2S0InitData =
     .dmaInterruptReceiveSource = DRV_I2S_RX_DMA_SOURCE_IDX0,
 };
 
-const DRV_I2S_INIT drvI2S1InitData =
-{
-    .moduleInit.value = DRV_I2S_POWER_STATE_IDX1,
-    .spiID = DRV_I2S_PERIPHERAL_ID_IDX1, 
-    .usageMode = DRV_I2S_USAGE_MODE_IDX1,
-    .baudClock = SPI_BAUD_RATE_CLK_IDX1,
-    .clockMode = DRV_I2S_CLK_MODE_IDX1,
-    .audioCommWidth = SPI_AUDIO_COMM_WIDTH_IDX1,
-    .audioTransmitMode = SPI_AUDIO_TRANSMIT_MODE_IDX1,
-    .inputSamplePhase = SPI_INPUT_SAMPLING_PHASE_IDX1,
-    .protocolMode = DRV_I2S_AUDIO_PROTOCOL_MODE_IDX1,
-    .queueSizeTransmit = QUEUE_SIZE_TX_IDX1,
-    .queueSizeReceive = QUEUE_SIZE_RX_IDX1,
-    .dmaChannelTransmit = DMA_CHANNEL_NONE,
-    .dmaChannelReceive = DRV_I2S_RX_DMA_CHANNEL_IDX1,    
-    .rxInterruptSource = DRV_I2S_RX_INT_SRC_IDX1,
-    .dmaInterruptReceiveSource = DRV_I2S_RX_DMA_SOURCE_IDX1,
-    
-};
 
 
 
@@ -561,17 +542,13 @@ void SYS_Initialize ( void* data )
 
     /* Initialize Drivers */
     sysObj.drvI2S0 = DRV_I2S_Initialize(DRV_I2S_INDEX_0, (SYS_MODULE_INIT *)&drvI2S0InitData);
-    sysObj.drvI2S1 = DRV_I2S_Initialize(DRV_I2S_INDEX_1, (SYS_MODULE_INIT *)&drvI2S1InitData);
 
 
     sysObj.sysDma = SYS_DMA_Initialize((SYS_MODULE_INIT *)&sysDmaInit);
     SYS_INT_VectorPrioritySet(INT_VECTOR_DMA0, INT_PRIORITY_LEVEL2);
     SYS_INT_VectorSubprioritySet(INT_VECTOR_DMA0, INT_SUBPRIORITY_LEVEL0);
-    SYS_INT_VectorPrioritySet(INT_VECTOR_DMA2, INT_PRIORITY_LEVEL3);
-    SYS_INT_VectorSubprioritySet(INT_VECTOR_DMA2, INT_SUBPRIORITY_LEVEL0);
 
     SYS_INT_SourceEnable(INT_SOURCE_DMA_0);
-    SYS_INT_SourceEnable(INT_SOURCE_DMA_2);
 
 
     /* Initialize USB Driver */ 

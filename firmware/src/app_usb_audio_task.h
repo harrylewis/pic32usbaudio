@@ -156,6 +156,9 @@ typedef struct
     uintptr_t i2sBufferHandle;    
     DRV_I2S_BUFFER_EVENT_HANDLER i2sBufferEventHandler; 
     uintptr_t context;
+    
+    // KDH[7]
+    USB_DEVICE_AUDIO_TRANSFER_HANDLE writeTransferHandle1;
 
 } APP_USB_AUDIO_DATA;
 

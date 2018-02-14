@@ -199,7 +199,7 @@ const SYS_DMA_INIT sysDmaInit =
     const USB_DEVICE_AUDIO_INIT audioInit0 =
     {
         .queueSizeRead = 1,
-        .queueSizeWrite = 1
+        .queueSizeWrite = 8
     };
 /**************************************************
  * USB Device Layer Function Driver Registration 

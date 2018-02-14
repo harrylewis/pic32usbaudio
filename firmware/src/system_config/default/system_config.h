@@ -135,11 +135,11 @@ extern "C" {
 #define DRV_I2S_TX_INT_SRC_IDX0					INT_SOURCE_SPI_2_TRANSMIT
 #define DRV_I2S_RX_INT_SRC_IDX0					INT_SOURCE_SPI_2_RECEIVE
 #define QUEUE_SIZE_TX_IDX0                      1
-#define QUEUE_SIZE_RX_IDX0                      3
+#define QUEUE_SIZE_RX_IDX0                      5
 #define DRV_I2S_RX_DMA_CHANNEL_IDX0				DMA_CHANNEL_0
 #define DRV_I2S_RX_DMA_SOURCE_IDX0				INT_SOURCE_DMA_0
 #define DRV_I2S_POWER_STATE_IDX0				SYS_MODULE_POWER_RUN_FULL
-#define DRV_I2S_QUEUE_DEPTH_COMBINED     		4
+#define DRV_I2S_QUEUE_DEPTH_COMBINED     		6
 
 
 // *****************************************************************************
@@ -208,7 +208,7 @@ extern "C" {
 
 
 /* Audio Queue Depth Combined */
-#define USB_DEVICE_AUDIO_QUEUE_DEPTH_COMBINED     2
+#define USB_DEVICE_AUDIO_QUEUE_DEPTH_COMBINED     9
 
 
 /* No of Audio streaming interfaces */
